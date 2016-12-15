@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaofei.dataSource.dal.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.xiaofei.dataSource.dal.model.UserDO">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <id column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="PASSWD" jdbcType="VARCHAR" property="passwd" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.xiaofei.dataSource.dal.model.UserDO">
+    INSERT INTO xiaouser(name,passwd)
+      VALUES (#{name},#{passwd})
+  </insert>
+
+  <select id="selectById" resultMap="BaseResultMap">
+    SELECT * FROM xiaouser where id=#{id}
+  </select>
+
+</mapper>

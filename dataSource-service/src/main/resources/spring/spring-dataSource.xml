@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="dataSource" class="com.xiaofei.dataSource.service.db.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry key="local" value-ref="local"/>
+                <entry key="remote" value-ref="remote"/>
+            </map>
+        </property>
+        <!-- 默认目标数据源为你主库数据源 -->
+        <property name="defaultTargetDataSource" ref="local"/>
+    </bean>
+
+    <bean id="local" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.local.driverClassName}" />
+        <property name="url" value="${jdbc.local.jdbcUrl}" />
+        <property name="username" value="${jdbc.local.jdbcUsername}" />
+        <property name="password" value="${jdbc.local.jdbcPassword}" />
+        <property name="initialSize" value="${jdbc.initialSize}" />
+        <property name="minIdle" value="${jdbc.minIdle}" />
+        <property name="maxIdle" value="${jdbc.maxIdle}" />
+        <property name="maxActive" value="${jdbc.maxActive}" />
+        <property name="maxWait" value="${jdbc.maxWait}" />
+        <property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+        <property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+        <property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+        <property name="validationQuery" value="select 1 from dual"/>
+    </bean>
+
+    <bean id="remote" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.remote.driverClassName}" />
+        <property name="url" value="${jdbc.remote.jdbcUrl}" />
+        <property name="username" value="${jdbc.remote.jdbcUsername}" />
+        <property name="password" value="${jdbc.remote.jdbcPassword}" />
+        <property name="initialSize" value="${jdbc.initialSize}" />
+        <property name="minIdle" value="${jdbc.minIdle}" />
+        <property name="maxIdle" value="${jdbc.maxIdle}" />
+        <property name="maxActive" value="${jdbc.maxActive}" />
+        <property name="maxWait" value="${jdbc.maxWait}" />
+        <property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+        <property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+        <property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+        <property name="validationQuery" value="select 1 from dual"/>
+    </bean>
+
+    <bean id="dataSourceExchange" class="com.xiaofei.dataSource.service.aspect.DataSourceExchange" />
+
+    <aop:config>
+    <aop:aspect ref="dataSourceExchange">
+        <!-- 拦截所有service方法 -->
+        <aop:pointcut id="dataSourcePointcut" expression="execution(* com.xiaofei.dataSource.service..*.*(..))"/>
+        <aop:before pointcut-ref="dataSourcePointcut" method="intercept" />
+    </aop:aspect>
+    </aop:config>
+
+</beans>
