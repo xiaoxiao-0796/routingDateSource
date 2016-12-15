@@ -15,7 +15,7 @@
         <context:component-scan base-package="com.xiaofei.dataSource"/>
 
         <!-- 引入全局配置文件-->
-        <context:property-placeholder location="classpath:properties/global.properties"/>
+        <context:property-placeholder location="classpath:/properties/global.properties"/>
 
         <!-- 数据库配置-->
         <import resource="spring-dataSource.xml"/>

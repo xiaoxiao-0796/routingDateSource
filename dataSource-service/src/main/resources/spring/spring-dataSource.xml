@@ -56,6 +56,8 @@
 
     <bean id="dataSourceExchange" class="com.xiaofei.dataSource.service.aspect.DataSourceExchange" />
 
+    <aop:aspectj-autoproxy />
+
     <aop:config>
     <aop:aspect ref="dataSourceExchange">
         <!-- 拦截所有service方法 -->
