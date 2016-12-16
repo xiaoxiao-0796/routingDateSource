@@ -13,6 +13,8 @@
         <module>dataSource-service</module>
         <module>dataSource-common</module>
         <module>dataSource-dal</module>
+        <module>dataSource-manage</module>
+        <module>dataSource-api</module>
     </modules>
 
     <properties>
@@ -44,6 +46,11 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.xiaofei.dataSource</groupId>
+                <artifactId>dataSource-web</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.xiaofei.dataSource</groupId>

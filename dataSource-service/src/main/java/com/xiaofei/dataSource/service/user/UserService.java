@@ -27,7 +27,7 @@ public class UserService {
 
 
     @Transactional
-    @DataSource(value = "local")
+    @DataSource(value = "remote")
     public UserDO selectUser(Long id){
         log.info("call selectUser parameter:{}",id);
         return this.userMapper.selectById(id);
