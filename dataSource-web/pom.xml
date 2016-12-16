@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>dataSource</artifactId>
+        <groupId>com.xiaofei.dataSource</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>dataSource-web</artifactId>
+    <version>${project.parent.version}</version>
+    <packaging>war</packaging>
+    <url>http://maven.apache.org</url>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.xiaofei.dataSource</groupId>
+            <artifactId>dataSource-dal</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xiaofei.dataSource</groupId>
+            <artifactId>dataSource-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xiaofei.dataSource</groupId>
+            <artifactId>dataSource-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>${project.parent.artifactId}</finalName>
+    </build>
+</project>

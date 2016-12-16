@@ -2,6 +2,7 @@ package com.xiaofei.dataSource.service.aspect;
 
 import com.xiaofei.dataSource.service.db.DataSource;
 import com.xiaofei.dataSource.service.db.DataSourceContextHolder;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,6 +22,7 @@ import java.lang.reflect.Method;
  */
 @Component
 @Aspect
+@Slf4j
 public class DemoAspect implements Ordered{
 
     @Pointcut("@annotation(com.xiaofei.dataSource.service.db.DataSource)")
@@ -29,6 +31,7 @@ public class DemoAspect implements Ordered{
 
     @Before("pointcut()")
     public void excute(JoinPoint joinPoint){
+        log.debug("DemoAspect excute start");
         Class<?> target = joinPoint.getTarget().getClass();
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         for (Class<?> clazz : target.getInterfaces()) {
